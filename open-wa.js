@@ -2,6 +2,7 @@ const qrCode = require("qrcode-terminal");
 const fs = require("fs");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 const axios = require("axios");
+const puppeteer = require("puppeteer")
 const apiKey = "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";
 
 const client = new Client({
@@ -10,7 +11,8 @@ const client = new Client({
   }),
 });
 
-client.on("authenticated", (session) => {
+client.on("authenticated", async (session) => {
+  const browser = await puppeteer.launch({headless: true});
   console.log("Authenticated with session:", session);
 });
 
