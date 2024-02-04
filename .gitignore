@@ -1,2 +1,8 @@
+# Ignore .wwebjs_auth folder
+.wwebjs_auth/
+
+# Ignore .wwebjs_cache folder
+.wwebjs_cache/
+
 # Ignore node_modules folder
 node_modules/

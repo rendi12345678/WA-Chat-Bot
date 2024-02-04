@@ -2,7 +2,7 @@ const qrCode = require("qrcode-terminal");
 const fs = require("fs");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 const axios = require("axios");
-const puppeteer = require("puppeteer")
+const puppeteer = require("puppeteer");
 const apiKey = "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";
 
 const client = new Client({
@@ -11,8 +11,25 @@ const client = new Client({
   }),
 });
 
+const run = async () => {
+  const browser = await puppeteer.launch();
+
+  const page = await browser.newPage();
+
+  await page.goto("http://chat-bot.ap-1.evennode.com/");
+
+  const three = await page.evaluate(() => {
+    return 1 + 2;
+  });
+
+  console.log(three);
+
+  await browser.close();
+};
+
+run();
+
 client.on("authenticated", async (session) => {
-  const browser = await puppeteer.launch({headless: true});
   console.log("Authenticated with session:", session);
 });
 
@@ -60,6 +77,7 @@ client.on("message", async (message) => {
     return;
   }
 
-  await message.reply("Maaf, saya tidak mengerti pertanyaan Anda. Silakan ajukan pertanyaan lainnya.");
+  await message.reply(
+    "Maaf, saya tidak mengerti pertanyaan Anda. Silakan ajukan pertanyaan lainnya."
+  );
 });
-
